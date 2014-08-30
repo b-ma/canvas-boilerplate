@@ -3,20 +3,24 @@ function timestamp() {
     return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
 }
 
-var game = {
+var loop = {
     run: function(options) {
 
         var now,
             dt       = 0,
             last     = timestamp(),
-            slow     = options.slow || 1, // slow motion scaling factor
-            step     = 1/options.fps,
-            slowStep = slow * step,
+            step     = 1 / options.fps,
+            ctx      = options.ctx,
+            buffers  = options.buffers,
             update   = options.update,
             render   = options.render;
+            gui      = options.gui;
 
         (function(that) {
             function loop() {
+                var slow     = gui.slow; // slow motion scaling factor
+                var slowStep = slow * step;
+
                 now = timestamp();
                 dt = dt + Math.min(1, (now - last) / 1000);
 
@@ -25,13 +29,13 @@ var game = {
                     update(step);
                 }
 
-                render(dt/slow);
+                render(ctx, buffers, dt/slow);
 
                 last = now;
                 that.rAFid = requestAnimationFrame(loop);
             }
 
-            requestAnimationFrame(loop);
+            that.rAFid = requestAnimationFrame(loop);
         }(this));
     },
 
@@ -40,4 +44,4 @@ var game = {
     }
 };
 
-module.exports = exports = game;
+module.exports = exports = loop;
