@@ -18,14 +18,14 @@ var Shape = Class.extend({
     init: function() {
         this.distance = 100;
         this.angle = 0;
-        this.angularVelocity = (Math.PI / 2);
+        this.angularVelocity = (Math.PI / 2); // rad/s
         this.radius = 5;
     }
 });
 var shape = new Shape();
 
 var update = function(dt) {
-    shape.angle += shape.angularVelocity * dt;
+    shape.angle = (shape.angle + shape.angularVelocity * dt) % (Math.PI * 2);
 }
 
 var render = function(dt) {
