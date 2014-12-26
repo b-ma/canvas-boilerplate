@@ -13,7 +13,7 @@ var loop = {
             ctx      = options.ctx,
             buffers  = options.buffers,
             update   = options.update,
-            render   = options.render;
+            render   = options.render,
             gui      = options.gui;
 
         (function(that) {
