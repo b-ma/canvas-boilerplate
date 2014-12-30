@@ -8,10 +8,10 @@
 
   // The base Class implementation (does nothing)
   // this.Class = function(){};
-  Class = function(){};
+  var Class = function(){};
 
   // Create a new Class that inherits from this class
-  Class.extend = function(prop) {
+  Class.extend = function extend(prop) {
     var _super = this.prototype;
 
     // Instantiate a base class (but only create the instance,
@@ -58,7 +58,7 @@
     Class.prototype.constructor = Class;
 
     // And make this class extendable
-    Class.extend = arguments.callee;
+    Class.extend = extend;
 
     return Class;
   };
