@@ -19,7 +19,7 @@ gulp.task('es6ify', function() {
       console.error(err.message);
       this.end();
     })
-    .pipe(fs.createWriteStream('./app/build.js'));
+    .pipe(fs.createWriteStream('./build.js'));
 });
 
 gulp.task('watch', function() {
