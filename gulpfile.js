@@ -2,8 +2,12 @@ var gulp = require('gulp')
   , browserify = require('browserify')
   , es6ify = require('es6ify')
   , fs = require('fs')
+  , portscanner = require('portscanner')
+  , http = require('http')
+  , serveStatic = require('serve-static')
 ;
 
+var ip = '127.0.0.1';
 var root = './app';
 var paths = {
   scripts: 'app/**/*.js'
@@ -27,4 +31,18 @@ gulp.task('watch', function() {
 });
 
 // default task
-gulp.task('default', ['watch', 'es6ify']);
+gulp.task('default', ['watch', 'es6ify'], function() {
+  // launch some static server
+  portscanner.findAPortNotInUse(3000, 3020, ip, function(error, port) {
+    // serve up public/ftp folder
+    var serve = serveStatic('./', {'index': ['index.html']})
+
+    var server = http.createServer(function(req, res){
+      var done = function(req, res) {};
+      serve(req, res, done);
+    });
+
+    server.listen(port);
+    console.log('>  server started at: http://' + ip + ':' + port);
+  });
+});
