@@ -17,7 +17,7 @@ gulp.task('es6ify', function() {
   browserify({ debug: true })
     .add(es6ify.runtime)
     .transform(es6ify)
-    .require(require.resolve('./app/main.js'), { entry: true })
+    .require(require.resolve('./app/bootstrap.js'), { entry: true })
     .bundle()
     .on('error', function(err) {
       console.error(err.message);
