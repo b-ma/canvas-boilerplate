@@ -6,14 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "b-ma",
+  "author": "Benjamin Matuszewski",
   "license": "ISC",
+  "scripts": {
+    "bundle": "browserify app/bootstrap.js -t babelify --outfile build.js -d",
+    "watch:bundle": "nodemon --watch app --ignore node_modules/ -x npm run bundle",
+    "serve": "http-server",
+    "hint": "find . -type f | grep -v \"node_modules\" | grep .es6.js$ | while read -r line; do jshint $line; done;"
+  },
   "devDependencies": {
-    "browserify": "^8.0.1",
-    "es6ify": "^1.6.0",
-    "gulp": "~3.8.6",
-    "portscanner": "^1.0.0",
-    "serve-static": "^1.8.0"
+    "babel-runtime": "^4.1.1",
+    "babelify": "^5.0.3"
   },
   "dependencies": {
     "d3-scale-linear": "0.0.0",

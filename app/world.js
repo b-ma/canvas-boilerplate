@@ -1,18 +1,17 @@
 var { w, h } = require('./globals');
-var Class = require('./lib/class');
 // test shape -----------------------
-var Shape = Class.extend({
-  init: function() {
+class Shape {
+  constructor() {
     this.distance = 100;
     this.angle = 0;
     this.angularVelocity = (Math.PI / 2); // rad/s
     this.radius = 5;
   }
-});
+};
 
 var shape;
 // App
-var App = {
+var World = {
   init: function() {
     shape = new Shape();
   },
@@ -39,4 +38,4 @@ var App = {
   }
 }
 
-module.exports = App;
+module.exports = World;

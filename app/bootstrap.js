@@ -1,5 +1,5 @@
 var GLOBALS = require('./globals');
-var app = require('./app');
+var world = require('./world');
 var loop = require('./lib/loop');
 var gui = require('./helpers/gui');
 // create scene
@@ -12,13 +12,13 @@ ctx.canvas.height = GLOBALS.h;
 // create buffers
 
 // init application
-app.init();
+world.init();
 // launch loop
 var options = {
     ctx: ctx,
     buffers: [],
-    update: app.update,
-    render: app.render,
+    update: world.update,
+    render: world.render,
     fps: GLOBALS.fps,
     gui: gui.model
 };
